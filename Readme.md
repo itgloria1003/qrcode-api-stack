@@ -3,8 +3,7 @@
 Following is notes on the guide <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started-hello-world.html>
 
 ## Prerequisite
-
-1. install AWS cli
+### install AWS cli
 
 <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html>
 
@@ -89,10 +88,20 @@ Note: Make sure the appropriate runtime install (via Conda) and the "Select appr
 
 go to the folder and start the local api gateway
 
-1. deploy guided for the first time
+## deploy guided for the first time
 
 ```bash
 sam deploy --guided
+```
+
+
+## describe the deployed stack 
+```bash
+sam list stack-outputs --region ap-northeast-1
+
+```
+```bash
+sam delete --stack-name qrcode --region ap-northeast-1
 ```
 
 1. build and start the local api gateway
@@ -102,7 +111,38 @@ sam build && sam local start-api
 ```
 
 
+### (Optional) export cloudformation template 
+```bash
 
+sam package --output-template-file packaged.yaml --s3-bucket  cf-sam-deployment 
+```
+
+Replace `template.yaml` with the name of your SAM template file, and `cloudformation.yaml` with the desired name for your CloudFormation template file.
+
+This command will process your SAM template, resolve SAM-specific resources, and generate a CloudFormation template (`cloudformation.yaml`) that represents your serverless application.
+
+
+
+Fortunately, the SAM source code contains a script for converting a SAM template to a CFT. Clone the SAM repo and then install the Python dependencies.
+
+git clone https://github.com/aws/serverless-application-model.git
+pip install -r serverless-application-model/requirements/base.txt
+pip install pyyaml
+
+
+python serverless-application-model/bin/sam-translate.py \
+  --template-file=packaged.yaml \
+  --output-template=cft.json
+
+
+The resulting CFT will be in JSON format, so if you're at all sane, you'll now convert this JSON file to YAML 😄. The cfn-flip tool was written to do exactly this.
+
+pip install cfn-flip
+cfn-flip -i json -o yaml cft.json cft.yaml
+rm cft.json
+
+## Reference 
+<https://www.packetmischief.ca/2020/12/30/converting-from-aws-sam-to-cloudformation/>
 
 ## troubleshoot
 

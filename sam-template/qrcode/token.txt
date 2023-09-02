@@ -1,0 +1,12 @@
+{
+    "Credentials": {
+        "AccessKeyId": "ASIA4SUYWJQEC5AAMA26",
+        "SecretAccessKey": "EEzAkZ6R4PKVozhKMGwlIHqqAA7X3gq4rxbx92q3",
+        "SessionToken": "IQoJb3JpZ2luX2VjEOT//////////wEaDmFwLW5vcnRoZWFzdC0xIkcwRQIhAORxPrkKVlWg/7+3ijaSh0q4JgJz8QLk7vrrdbe7/ddqAiA5br2hoq4k/psXL5lrJDqwF7IthOvvj52phtqBZG0KMyqpAgit//////////8BEAIaDDg2NDY4MjM5NjY4MCIMXPhntuu+C3cyiWRjKv0BDvwkm6LF95Fc7IYAzws3KZn1EndRMajek26mtb3DcJa7oTee/EX72jP7uWjwDXMz2txymSpoVFpobpgIjveZLG/r1BNP7YwyvIQJn3t8cckxNzmgEiqVRMI3nbeI0Jdd/I1+o2EdVKSYTJ9KGn6QfqFn0i+7GL03t7gT0BQq+CBzzOg6X9QV49iW3YTA/Dn35bUh1Fd8T8A+rfAFnKJTkwswAFvhR3DqXOIw7gtilzFxKvB5XR486QU81zyTccaPR/590AYoGN2KSnDqEAkBof0DyeUbUQ/EzCvXBccx6ScpgvdBn9ReLrnV3Zm+n3HXhHvDnxKvorB3MJl4LjC+mbmnBjqdAer/T8sDl712UyN/G/QHxgrg+8uytvPwlXy8Q/wqXPt6U3lbrZ4F+EaT9mN1jxhC/VWbxUXXNTK+U7HN4R5mBNQsJqf+SpW8XIo8syR9Nj86j6WkkqhMhN1fVW8tWtzyg9t0bsaNWq/ROv3JAFmEQPJHiQODZ7Qvs68eKyOdjCUeGK7um8srOdNX4vtxBKPKZTfQ3KLYze4HX0nGzyg=",
+        "Expiration": "2023-08-29T20:53:34+00:00"
+    },
+    "AssumedRoleUser": {
+        "AssumedRoleId": "AROA4SUYWJQEJIUTKM6YP:deployment-session1",
+        "Arn": "arn:aws:sts::864682396680:assumed-role/localDeveloperSamDeployment/deployment-session1"
+    }
+}

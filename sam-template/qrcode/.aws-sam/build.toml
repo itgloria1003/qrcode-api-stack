@@ -5,6 +5,7 @@ codeuri = "/Users/gloriatse/git/qrcode-api-stack/sam-template/qrcode"
 runtime = "python3.8"
 architecture = "x86_64"
 handler = "src/handlers/get_all_items.getAllItemsHandler"
+source_hash = "7f007a2122283870df4a00bf2904bd15993b5573d0bde112d70a2c39c1b49299"
 manifest_hash = ""
 packagetype = "Zip"
 functions = ["getAllItemsFunction", "getByIdFunction", "putItemFunction"]

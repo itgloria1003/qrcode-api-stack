@@ -1,0 +1,120 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: qrcode
+Transform:
+- AWS::Serverless-2016-10-31
+Resources:
+  getAllItemsFunctionToTableConnector:
+    Type: AWS::Serverless::Connector
+    Properties:
+      Source:
+        Id: getAllItemsFunction
+      Destination:
+        Id: SampleTable
+      Permissions:
+      - Read
+    Metadata:
+      SamResourceId: getAllItemsFunctionToTableConnector
+  getByIdFunctionToTableConnector:
+    Type: AWS::Serverless::Connector
+    Properties:
+      Source:
+        Id: getByIdFunction
+      Destination:
+        Id: SampleTable
+      Permissions:
+      - Read
+    Metadata:
+      SamResourceId: getByIdFunctionToTableConnector
+  putItemFunctionToTableConnector:
+    Type: AWS::Serverless::Connector
+    Properties:
+      Source:
+        Id: putItemFunction
+      Destination:
+        Id: SampleTable
+      Permissions:
+      - Write
+    Metadata:
+      SamResourceId: putItemFunctionToTableConnector
+  getAllItemsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/get_all_items.getAllItemsHandler
+      Runtime: python3.8
+      MemorySize: 128
+      Timeout: 100
+      Description: A simple example includes a HTTP get method to get all items from
+        a DynamoDB table.
+      Environment:
+        Variables:
+          SAMPLE_TABLE:
+            Ref: SampleTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1iagsxb1e817l/qrcode/38bb643827c17aef56bbff66ae5b9ebb
+    Metadata:
+      SamResourceId: getAllItemsFunction
+  getByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/get_by_id.getByIdHandler
+      Runtime: python3.8
+      MemorySize: 128
+      Timeout: 100
+      Description: A simple example includes a HTTP get method to get one item by
+        id from a DynamoDB table.
+      Environment:
+        Variables:
+          SAMPLE_TABLE:
+            Ref: SampleTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{id}
+            Method: GET
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1iagsxb1e817l/qrcode/38bb643827c17aef56bbff66ae5b9ebb
+    Metadata:
+      SamResourceId: getByIdFunction
+  putItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/put_item.putItemHandler
+      Runtime: python3.8
+      MemorySize: 128
+      Timeout: 100
+      Description: A simple example includes a HTTP post method to add one item to
+        a DynamoDB table.
+      Environment:
+        Variables:
+          SAMPLE_TABLE:
+            Ref: SampleTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1iagsxb1e817l/qrcode/38bb643827c17aef56bbff66ae5b9ebb
+    Metadata:
+      SamResourceId: putItemFunction
+  SampleTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+    Metadata:
+      SamResourceId: SampleTable
+Outputs:
+  WebEndpoint:
+    Description: API Gateway endpoint URL for Prod stage
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
